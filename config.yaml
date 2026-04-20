@@ -1,0 +1,16 @@
+dataset_folder: ./dataset
+
+crop:
+  enabled: false
+  aspect_ratio: "16:9"
+  method: "center"
+
+rename:
+  enabled: false
+  criteria: "progressive" # or "date_modified"
+  prefix: ""              # empty = just numbers: 1.png, 2.png, 3.png
+
+caption:
+  enabled: false
+  model: "gemma4:e4b"
+  system_prompt: "Describe this image in detail for use as a training caption in a image generation model."
