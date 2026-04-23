@@ -1,12 +1,12 @@
 dataset_folder: ./dataset
 
 crop:
-  enabled: false
-  aspect_ratio: "16:9"
+  enabled: true
+  aspect_ratio: "9:16"
   method: "center"
 
 rename:
-  enabled: false
+  enabled: true
   criteria: "progressive" # or "date_modified"
   prefix: ""              # empty = just numbers: 1.png, 2.png, 3.png
 
