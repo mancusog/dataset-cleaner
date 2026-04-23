@@ -2,14 +2,25 @@ import typer
 from pathlib import Path
 from dataset_cleaner.config import load_config
 from dataset_cleaner.reporting import print_info
+from dataset_cleaner.cleaning import rename_images
 
 app = typer.Typer()
+YAML = "config.yaml"
 
 @app.command()
-def info(config: Path = Path("config.yaml")):
+def info(config: Path = Path(YAML)):
     """Show dataset folder metadata."""
     cfg = load_config(config)
     print_info(cfg.dataset_folder)
+
+@app.command()
+def rename(config: Path = Path(YAML)):
+    """Show if rename is enabled"""
+    cfg = load_config(config)
+    if cfg.rename.enabled:
+        rename_images(cfg.dataset_folder, cfg.rename)
+    else:
+        typer.echo("Rename is disabled. Set rename.enabled: true in config.yaml")
 
 if __name__ == "__main__":
     app()
