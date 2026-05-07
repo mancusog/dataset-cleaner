@@ -1,8 +1,6 @@
 ## Description
 
-A command-line tool that reads a messy CSV file, validates and cleans it, and produces a detailed report.
-It validates column schemas with Pydantic, handles missing values, detects and optionally removes duplicates and outliers, and generates a textual report.
-Supports YAML config files to reuse the same pipeline across different datasets.
+A command-line tool to prepare image datasets for generative AI model training. Supports batch renaming, aspect ratio cropping, and automatic captioning via Ollama. Configured via YAML.
 
 ## Installation
 
@@ -13,21 +11,23 @@ pip install dataset-cleaner
 ## Usage
 
 ```bash
-# Basic cleaning
-dataset-cleaner clean dataset.csv --output dataset_clean.csv
+# Show dataset info
+dataset-cleaner info
 
-# With YAML config
-dataset-cleaner clean dataset.csv --config config.yaml --output dataset_clean.csv
+# Rename images progressively
+dataset-cleaner rename
 
-# Report only, without modifying the file
-dataset-cleaner report dataset.csv
+# Crop images to target aspect ratio
+dataset-cleaner crop
+
+# Caption images with Ollama
+dataset-cleaner caption
 ```
 
 ## Features
 
-- Column schema validation with Pydantic
-- Missing values handling (drop, mean/median, mode)
-- Duplicate row detection and removal
-- Outlier detection (IQR or z-score)
-- Textual report + before/after PNG histogram
+- Dataset inspection (resolution, file size, caption status)
+- Progressive batch renaming
+- Aspect ratio cropping (center crop)
+- Automatic captioning via Ollama (local LLM)
 - Reusable YAML config
