@@ -3,6 +3,7 @@ from pathlib import Path
 from dataset_cleaner.config import load_config
 from dataset_cleaner.reporting import print_info
 from dataset_cleaner.cleaning import rename_images, crop_images
+from dataset_cleaner.caption import caption_images
 
 app = typer.Typer()
 YAML = "config.yaml"
@@ -30,6 +31,15 @@ def crop (config: Path = Path(YAML)):
         crop_images(cfg.dataset_folder, cfg.crop)
     else:
         typer.echo("Crop is disabled. Set crop.enabled: true in config.yaml")
+
+@app.command()
+def caption (config: Path = Path(YAML)):
+    """Caption images with Ollama"""
+    cfg = load_config(config)
+    if cfg.caption.enabled:
+        caption_images(cfg.dataset_folder, cfg.caption)
+    else:
+        typer.echo("Caption is disabled, Set caption.enabled: true in config.yaml")
 
 if __name__ == "__main__":
     app()
